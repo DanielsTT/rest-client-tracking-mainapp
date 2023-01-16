@@ -14,7 +14,7 @@
 
 <body>
 <div class="container text-center">
-  <form class="form-signin" th:action="@{/login}" method="post">
+  <form class="form-signin" th:action="@{/api/sign-in}" method="post">
     <img class="mb-4" th:src="@{/assets/bootstrap-solid.svg}" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="username" class="sr-only">Email address</label>
@@ -22,7 +22,7 @@
     <label for="password" class="sr-only">Password</label>
     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-muted">© 2021</p>
+    <p class="mt-5 mb-3 text-muted">© 2023</p>
   </form>
 </div>
 

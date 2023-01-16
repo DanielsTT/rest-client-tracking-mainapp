@@ -7,13 +7,16 @@
         <a class="navbar-brand" th:href="@{/}">Home</a>
     </div>
     <div class="nav-item">
-        <a class="navbar-brand" th:href="@{/trainers/all}">Trainers list</a>
+        <a class="navbar-brand" th:href="@{/trainers/all}" sec:authorize="hasRole('ROLE_ADMIN')">Trainers list</a>
     </div>
     <div class="nav-item">
-        <a class="navbar-brand" th:href="@{/trainers/new}">Add trainer</a>
+        <a class="navbar-brand" th:href="@{/trainers/new}" sec:authorize="hasRole('ROLE_ADMIN')">Add trainer</a>
     </div>
     <div class="nav-item">
-        <a class="navbar-brand" th:href="@{/proxy/logs}">Logs</a>
+        <a class="navbar-brand" th:href="@{/proxy/logs}" sec:authorize="hasRole('ROLE_ADMIN')">Logs</a>
+    </div>
+    <div class="nav-item">
+        <a class="navbar-brand btn btn-outline-primary" th:href="@{/sign-in}" sec:authorize="!isAuthenticated()">Sign In</a>
     </div>
     <div class="nav-item">
         <a class="navbar-brand btn btn-outline-primary" th:href="@{/logout}" sec:authorize="isAuthenticated()">Sign out</a>
