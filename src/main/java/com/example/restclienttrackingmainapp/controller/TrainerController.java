@@ -5,10 +5,7 @@ import com.example.restclienttrackingmainapp.dto.UserDto;
 import com.example.restclienttrackingmainapp.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -35,9 +32,15 @@ public class TrainerController {
     }
 
     @PostMapping(value = "/new")
-    public String createTrainer(@Valid @ModelAttribute("trainer") CreateUserDto user, Model model) {
+    public String addNewTrainer(@Valid @ModelAttribute("trainer") CreateUserDto user, Model model) {
         model.addAttribute("trainer", userService.createUser(user));
         return "trainer";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteTrainer(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "redirect:/trainers/all";
     }
 
 }
