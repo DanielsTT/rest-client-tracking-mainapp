@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class UserServiceTest extends AbstractConfigTest {
 
     @Autowired
@@ -37,18 +38,17 @@ class UserServiceTest extends AbstractConfigTest {
         CreateUserDto user = new CreateUserDto("Janina", "Kowak", "jn@example.com", "password", "9945713320");
         UserDto savedUser = userService.createUser(user);
 
-        // when
-        CreateUserDto updatedUser = new CreateUserDto("Janina", "Kovalsky", "jk@example.com", "password", "9945713320");
-        userService.updateUser(savedUser.getId(), updatedUser);
+        UserDto userFromDb = userService.findById(savedUser.getId()).orElse(null);
+        userFromDb.setLastName("Kovalsky");
+        userFromDb.setEmail("jk@example.com");
 
-        UserDto fromDb = userService.findById(savedUser.getId()).orElse(null);
+        // when
+        UserDto updatedUser = userService.updateUser(userFromDb);
 
         //then
-        assertNotNull(fromDb);
-        assertEquals(updatedUser.getFirstName(), fromDb.getFirstName());
-        assertEquals(updatedUser.getLastName(), fromDb.getLastName());
-        assertEquals(updatedUser.getEmail(), fromDb.getEmail());
-        assertEquals(updatedUser.getPassword(), fromDb.getPassword());
-        assertEquals(updatedUser.getPhone(), fromDb.getPhone());
+        assertNotNull(updatedUser);
+        assertEquals(updatedUser.getLastName(), "Kovalsky");
+        assertEquals(updatedUser.getEmail(), "jk@example.com");
+
     }
 }

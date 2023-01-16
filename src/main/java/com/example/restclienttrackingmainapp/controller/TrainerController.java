@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+
 @Controller
 @RequestMapping("/trainers")
 public class TrainerController {
@@ -37,10 +38,37 @@ public class TrainerController {
         return "trainer";
     }
 
+    @GetMapping("{id}")
+    public String getTrainer(@PathVariable Long id, Model model) {
+        UserDto trainerDto = userService.findById(id).orElseThrow();
+        model.addAttribute("trainer", trainerDto);
+        return "trainer";
+    }
+
+
+    @GetMapping("edit/{id}")
+    public String getEditTrainerForm(@PathVariable Long id, Model model) {
+        UserDto trainerDto = userService.findById(id).orElseThrow();
+        model.addAttribute("trainer", trainerDto);
+        return "trainer-edit-form";
+    }
+
+
+    @PostMapping(value = "/update")
+    public String editTrainer(@Valid @ModelAttribute("trainer") UserDto trainer, Model model) {
+        UserDto update = userService.updateUser(trainer);
+
+        if (update == null) {
+            return "error";
+        }
+
+        model.addAttribute("trainer", update);
+        return "trainer";
+    }
+
     @GetMapping("/delete/{id}")
     public String deleteTrainer(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/trainers/all";
     }
-
 }

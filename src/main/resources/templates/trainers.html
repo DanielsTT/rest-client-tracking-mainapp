@@ -38,6 +38,8 @@
                     <td th:text="${trainer.phone}" />
                     <td>
                         <div class="container">
+                            <a class="btn btn-outline-primary" th:href="@{/trainers/{id}(id=${trainer.id})}">View</a>
+                            <a class="btn btn-outline-primary" th:href="@{/trainers/edit/{id}(id=${trainer.id})}">Edit</a>
                             <a class="btn btn-outline-primary" th:href="@{/trainers/delete/{id}(id=${trainer.id})}">Delete</a>
                         </div>
                     </td>

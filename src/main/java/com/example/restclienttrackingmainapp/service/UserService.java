@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -37,14 +38,14 @@ public class UserService {
     }
 
     @Transactional
-    public UserDto updateUser(Long id, CreateUserDto updateUserDto) {
-        User user = userRepository.findById(id).orElse(null);
+    public UserDto updateUser(UserDto userDto) {
+        User user = userRepository.findById(userDto.getId()).orElse(null);
         if (user != null) {
-            user.setFirstName(updateUserDto.getFirstName());
-            user.setLastName(updateUserDto.getLastName());
-            user.setEmail(updateUserDto.getEmail());
-            user.setPassword(updateUserDto.getPassword());
-            user.setPhone(updateUserDto.getPhone());
+            user.setFirstName(userDto.getFirstName());
+            user.setLastName(userDto.getLastName());
+            user.setEmail(userDto.getEmail());
+            user.setPassword(userDto.getPassword());
+            user.setPhone(userDto.getPhone());
         }
 
         userRepository.save(user);
@@ -53,7 +54,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean deleteUser(Long id){
+    public boolean deleteUser(Long id) {
         Optional<User> user = userRepository.findById(id);
 
         if (user.isPresent()) {
