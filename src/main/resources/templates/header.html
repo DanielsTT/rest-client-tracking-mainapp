@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <body>
 <nav th:fragment="header" class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar justify-content-center"
@@ -14,6 +14,9 @@
     </div>
     <div class="nav-item">
         <a class="navbar-brand" th:href="@{/proxy/logs}">Logs</a>
+    </div>
+    <div class="nav-item">
+        <a class="navbar-brand btn btn-outline-primary" th:href="@{/logout}" sec:authorize="isAuthenticated()">Sign out</a>
     </div>
 </nav>
 <!-- Bootstrap core JS-->
