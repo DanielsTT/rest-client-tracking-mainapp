@@ -37,12 +37,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl(HOME_PAGE);
     }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("{bcrypt}$2a$12$NID.YIxlFe/Au92P0zbaquwb1/.GR8vkd2mKgZDaj4Np3IQ54JNAO") //admin
-                .roles("ADMIN");
-    }
 }

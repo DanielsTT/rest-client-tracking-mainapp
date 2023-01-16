@@ -37,7 +37,7 @@ public class User {
     @Column(name = COLUMN_PREFIX + "phone", nullable = false)
     private String phone;
 
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = User.TABLE_NAME + "_" + Role.TABLE_NAME,
             joinColumns = @JoinColumn(name = User.COLUMN_PREFIX + "id"),
