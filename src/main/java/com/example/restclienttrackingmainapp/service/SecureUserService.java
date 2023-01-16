@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,15 +19,31 @@ public class SecureUserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public SecureUserService(UserRepository userRepository) {
+    private final UserService userService;
+
+    public SecureUserService(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
+//    @Override
+//    @Transactional
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userRepository.findByFirstName(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User: " + username + " does not exist"));
+//        return map(user);
+//    }
+
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByFirstName(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User: " + username + " does not exist"));
-        return map(user);
+        User user = userService.findByFirstName(username);
+
+        if (user != null){
+            return map(user);
+        } else {
+            throw new UsernameNotFoundException("User: " + username + " does not exist");
+        }
     }
 
     public List<UserDto> getUsers() {

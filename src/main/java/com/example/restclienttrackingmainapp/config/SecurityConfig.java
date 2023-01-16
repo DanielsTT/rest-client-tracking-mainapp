@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         HOME_PAGE,
                         SIGN_IN_PAGE,
                         SIGN_IN_API).permitAll()
+//                .antMatchers("/proxy/logs").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -38,3 +39,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl(HOME_PAGE);
     }
 }
+

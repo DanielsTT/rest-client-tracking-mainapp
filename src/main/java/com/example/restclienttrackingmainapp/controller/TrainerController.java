@@ -2,6 +2,7 @@ package com.example.restclienttrackingmainapp.controller;
 
 import com.example.restclienttrackingmainapp.dto.CreateUserDto;
 import com.example.restclienttrackingmainapp.dto.UserDto;
+import com.example.restclienttrackingmainapp.service.SecureUserService;
 import com.example.restclienttrackingmainapp.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,16 +16,25 @@ import javax.validation.Valid;
 public class TrainerController {
 
     private final UserService userService;
+    private final SecureUserService secureUserService;
 
-    public TrainerController(UserService userService) {
+    public TrainerController(UserService userService, SecureUserService secureUserService) {
         this.userService = userService;
+        this.secureUserService = secureUserService;
     }
+
+//    @GetMapping("/all")
+//    public String getTrainers(Model model) {
+//        model.addAttribute("trainers", userService.getAllUsers());
+//        return "trainers";
+//    }
 
     @GetMapping("/all")
     public String getTrainers(Model model) {
-        model.addAttribute("trainers", userService.getAllUsers());
+        model.addAttribute("trainers", secureUserService.getUsers());
         return "trainers";
     }
+
 
     @GetMapping("/new")
     public String getNewTrainerForm(Model model) {
@@ -71,4 +81,5 @@ public class TrainerController {
         userService.deleteUser(id);
         return "redirect:/trainers/all";
     }
+
 }
