@@ -41,11 +41,9 @@ public class UserService {
     public UserDto updateUser(UserDto userDto) {
         User user = userRepository.findById(userDto.getId()).orElse(null);
         if (user != null) {
-            user.setFirstName(userDto.getFirstName());
-            user.setLastName(userDto.getLastName());
+            user.setName(userDto.getName());
             user.setEmail(userDto.getEmail());
 //            user.setPassword(userDto.getPassword());
-            user.setPhone(userDto.getPhone());
         }
 
         userRepository.save(user);
@@ -66,3 +64,4 @@ public class UserService {
     }
 
 }
+

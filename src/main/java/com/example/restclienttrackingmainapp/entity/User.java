@@ -24,11 +24,8 @@ public class User {
     @Column(name = COLUMN_PREFIX + "id", nullable = false)
     private Long id;
 
-    @Column(name = COLUMN_PREFIX + "first_name", nullable = false)
-    private String firstName;
-
-    @Column(name = COLUMN_PREFIX + "last_name", nullable = false)
-    private String lastName;
+    @Column(name = COLUMN_PREFIX + "name", nullable = false)
+    private String name;
 
     @Column(name = COLUMN_PREFIX + "email", nullable = false)
     private String email;
@@ -36,10 +33,7 @@ public class User {
     @Column(name = COLUMN_PREFIX + "password", nullable = false)
     private String password;
 
-    @Column(name = COLUMN_PREFIX + "phone", nullable = false)
-    private String phone;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(
             name = User.TABLE_NAME + "_" + Role.TABLE_NAME,
             joinColumns = @JoinColumn(name = User.COLUMN_PREFIX + "id"),

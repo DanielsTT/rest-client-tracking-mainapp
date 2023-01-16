@@ -6,6 +6,7 @@ import com.example.restclienttrackingmainapp.entity.User;
 import com.example.restclienttrackingmainapp.repository.RoleRepository;
 import com.example.restclienttrackingmainapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,20 +20,17 @@ public class UserServiceImpl implements UserServiceCrud {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
 
     @Override
     public void saveUser(UserDto userDto) {
         User user = new User();
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
+        user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
-        user.setPhone(userDto.getPhone());
-
-
 //        user.setPassword(userDto.getPassword());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         Role role = roleRepository.findByName("ROLE_ADMIN");
-        if(role == null){
+        if (role == null) {
             role = checkRoleExist();
         }
         user.setRoles(List.of(role));
@@ -46,18 +44,9 @@ public class UserServiceImpl implements UserServiceCrud {
 
     @Override
     public List<UserDto> findAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream().map(this::convertEntityToDto)
+        return userRepository.findAll().stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
                 .collect(Collectors.toList());
-    }
-
-    private UserDto convertEntityToDto(User user){
-        UserDto userDto = new UserDto();
-        userDto.setFirstName(user.getFirstName());
-        userDto.setLastName(user.getLastName());
-        userDto.setEmail(user.getEmail());
-        userDto.setPhone(user.getPhone());
-        return userDto;
     }
 
     private Role checkRoleExist() {

@@ -2,6 +2,7 @@ package com.example.restclienttrackingmainapp.controller;
 
 import com.example.restclienttrackingmainapp.dto.UserDto;
 import com.example.restclienttrackingmainapp.entity.User;
+import com.example.restclienttrackingmainapp.service.UserServiceCrud;
 import com.example.restclienttrackingmainapp.service.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,9 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController {
 
-    private final UserServiceImpl userService;
+    private final UserServiceCrud userService;
 
-    public RegistrationController(UserServiceImpl userService) {
+    public RegistrationController(UserServiceCrud userService) {
         this.userService = userService;
     }
 

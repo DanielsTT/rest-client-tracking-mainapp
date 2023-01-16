@@ -5,11 +5,19 @@ CREATE TABLE roles
     CONSTRAINT pk_roles PRIMARY KEY (r_id)
 );
 
+CREATE TABLE users
+(
+    u_id       BIGINT AUTO_INCREMENT NOT NULL,
+    u_name     VARCHAR(255)          NOT NULL,
+    u_email    VARCHAR(255)          NOT NULL,
+    u_password VARCHAR(255)          NOT NULL,
+    CONSTRAINT pk_users PRIMARY KEY (u_id)
+);
+
 CREATE TABLE users_roles
 (
     r_id BIGINT NOT NULL,
-    u_id BIGINT NOT NULL,
-    CONSTRAINT pk_users_roles PRIMARY KEY (r_id, u_id)
+    u_id BIGINT NOT NULL
 );
 
 ALTER TABLE users_roles
