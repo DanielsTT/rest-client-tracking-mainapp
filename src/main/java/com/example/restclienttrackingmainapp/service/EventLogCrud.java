@@ -4,9 +4,11 @@ package com.example.restclienttrackingmainapp.service;
 import com.example.restclienttrackingmainapp.dto.EventLogDto;
 import org.springframework.http.HttpHeaders;
 
+import java.util.List;
+
 public interface EventLogCrud {
 
 //    EventLogDto save(CreateEventLogDto createEventLogDto);
 
-    EventLogDto[] getEventLogs(HttpHeaders headers);
+    List<EventLogDto> getEventLogs(HttpHeaders headers);
 }
