@@ -9,6 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class EventLogLogger implements HandlerInterceptor {
         eventLog.setIpAddress(request.getRemoteAddr());
         eventLog.setRequestMethod(request.getMethod());
         eventLog.setRequestUri(String.valueOf(request.getRequestURL()));
-        eventLog.setRequestTimestamp(LocalDate.now());
+        eventLog.setRequestTimestamp(LocalDateTime.now());
 
         eventLogService.createEventLog(eventLog);
 

@@ -19,35 +19,21 @@ public class SecureUserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    private final UserService userService;
 
-    public SecureUserService(UserRepository userRepository, UserService userService) {
+    public SecureUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userService = userService;
     }
-
-//    @Override
-//    @Transactional
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        User user = userRepository.findByFirstName(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("User: " + username + " does not exist"));
-//        return map(user);
-//    }
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByFirstName(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
 
-        if (user != null){
+        if (user != null) {
             return map(user);
         } else {
-            throw new UsernameNotFoundException("User: " + username + " does not exist");
+            throw new UsernameNotFoundException("Email: " + email + " does not exist");
         }
-    }
-
-    public List<UserDto> getUsers() {
-        return userRepository.findAll().stream().map(this::map).map(this::toDto).collect(Collectors.toList());
     }
 
     private SecureUser map(User user) {

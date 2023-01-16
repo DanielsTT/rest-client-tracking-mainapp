@@ -31,10 +31,6 @@ public class UserService {
         return userRepository.findById(id).map(user -> modelMapper.map(user, UserDto.class));
     }
 
-    public User findByFirstName(String firstName) {
-        return userRepository.findByFirstName(firstName);
-    }
-
     @Transactional
     public UserDto createUser(CreateUserDto createUserDto) {
         User user = modelMapper.map(createUserDto, User.class);

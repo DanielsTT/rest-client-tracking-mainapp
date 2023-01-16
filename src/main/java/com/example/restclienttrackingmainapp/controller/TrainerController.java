@@ -16,25 +16,16 @@ import javax.validation.Valid;
 public class TrainerController {
 
     private final UserService userService;
-    private final SecureUserService secureUserService;
 
-    public TrainerController(UserService userService, SecureUserService secureUserService) {
+    public TrainerController(UserService userService) {
         this.userService = userService;
-        this.secureUserService = secureUserService;
     }
-
-//    @GetMapping("/all")
-//    public String getTrainers(Model model) {
-//        model.addAttribute("trainers", userService.getAllUsers());
-//        return "trainers";
-//    }
 
     @GetMapping("/all")
     public String getTrainers(Model model) {
-        model.addAttribute("trainers", secureUserService.getUsers());
+        model.addAttribute("trainers", userService.getAllUsers());
         return "trainers";
     }
-
 
     @GetMapping("/new")
     public String getNewTrainerForm(Model model) {
