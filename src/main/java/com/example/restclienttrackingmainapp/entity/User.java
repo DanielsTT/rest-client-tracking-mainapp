@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -35,5 +36,13 @@ public class User {
 
     @Column(name = COLUMN_PREFIX + "phone", nullable = false)
     private String phone;
+
+    @ManyToMany()
+    @JoinTable(
+            name = User.TABLE_NAME + "_" + Role.TABLE_NAME,
+            joinColumns = @JoinColumn(name = User.COLUMN_PREFIX + "id"),
+            inverseJoinColumns = @JoinColumn(name = Role.COLUMN_PREFIX + "id")
+    )
+    private Set<Role> roles;
 
 }
