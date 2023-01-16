@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Create</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div th:insert="header"></div>
+<div class="container text-center">
+    <section class="jumbotron text-left">
+        <div class="container">
+            <h1 class="jumbotron-heading">Trainer</h1>
+        </div>
+        <div class="container">
+            <form th:object="${trainer}" th:action="@{/trainers/new}" method="post">
+                <label th:for="first_name_input_id">First Name:</label>
+                <br>
+                <input type="text" id="first_name_input_id" th:field="*{firstName}">
+                <br><br>
+
+                <label th:for="last_name_input_id">Last Name:</label>
+                <br>
+                <input type="text" id="last_name_input_id" th:field="*{lastName}">
+                <br><br>
+
+                <label th:for="email_input_id">Email:</label>
+                <br>
+                <input type="text" id="email_input_id" th:field="*{email}">
+                <br><br>
+
+                <label th:for="password_input_id">Password:</label>
+                <br>
+                <input type="text" id="password_input_id" th:field="*{password}">
+                <br><br>
+
+                <label th:for="phone_input_id">Phone:</label>
+                <br>
+                <input type="text" id="phone_input_id" th:field="*{phone}">
+                <br><br>
+
+                <div class="container">
+                    <button type="submit" class="btn btn-outline-primary">Save</button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+</div>
+<!-- Bootstrap core JS-->
+<script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
