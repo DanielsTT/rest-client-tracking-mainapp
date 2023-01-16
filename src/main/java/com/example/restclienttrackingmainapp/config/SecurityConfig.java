@@ -14,6 +14,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String SIGN_IN_PAGE = "/sign-in";
     private static final String SIGN_IN_API = "/api/sign-in";
     private static final String SIGN_OUT_API = "/api/sign-out";
+    private static final String REGISTER_PAGE = "/register/**";
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -22,7 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/bootstrap/**", "/assets/bootstrap-solid.svg",
                         HOME_PAGE,
                         SIGN_IN_PAGE,
-                        SIGN_IN_API).permitAll()
+                        SIGN_IN_API,
+                        REGISTER_PAGE).permitAll()
 //                .antMatchers("/proxy/logs").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

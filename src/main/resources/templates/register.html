@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Secure app</title>
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div th:insert="header"></div>
+<div class="container text-center">
+    <section class="jumbotron text-left">
+        <div th:if="${param.success}">
+            <div class="alert alert-info">You've successfully registered to Main App!</div>
+        </div>
+        <div class="container">
+            <h1 class="jumbotron-heading">Registration</h1>
+        </div>
+
+        <div class="card-body">
+            <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+
+                <div class="form-group mb-auto">
+                    <label class="form-label">First Name</label>
+                    <input class="form-control"
+                           id="firstName"
+                           name="firstName"
+                           placeholder="Enter first name"
+                           th:field="*{firstName}"
+                           type="text"
+                    />
+                    <p th:errors="*{firstName}" class="text-danger"
+                       th:if="${#fields.hasErrors('firstName')}">
+                    </p>
+                </div>
+
+                <div class="form-group mb-auto">
+                    <label class="form-label">Last Name</label>
+                    <input class="form-control"
+                           id="lastName"
+                           name="lastName"
+                           placeholder="Enter last name"
+                           th:field="*{lastName}"
+                           type="text"
+                    />
+                    <p th:errors="*{lastName}" class="text-danger"
+                       th:if="${#fields.hasErrors('lastName')}">
+                    </p>
+                </div>
+                <div class="form-group mb-auto">
+                    <label class="form-label">Email</label>
+                    <input class="form-control"
+                           id="email"
+                           name="email"
+                           placeholder="Enter email address"
+                           th:field="*{email}"
+                           type="email"
+                    />
+                    <p th:errors="*{email}" class="text-danger"
+                       th:if="${#fields.hasErrors('email')}">
+                    </p>
+                </div>
+                <div class="form-group mb-auto">
+                    <label class="form-label">Password</label>
+                    <input class="form-control"
+                           id="password"
+                           name="password"
+                           placeholder="Enter password"
+                           th:field="*{password}"
+                           type="password"
+                    />
+                    <p th:errors="*{password}" class="text-danger"
+                       th:if="${#fields.hasErrors('password')}">
+                    </p>
+                </div>
+
+                <div class="form-group mb-auto">
+                    <label class="form-label">Phone</label>
+                    <input class="form-control"
+                           id="phone"
+                           name="phone"
+                           placeholder="Enter phone"
+                           th:field="*{phone}"
+                           type="phone"
+                    />
+                    <p th:errors="*{phone}" class="text-danger"
+                       th:if="${#fields.hasErrors('phone')}">
+                    </p>
+                </div>
+
+                <div class="container">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>
+
+<!-- Bootstrap core JS-->
+<script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
