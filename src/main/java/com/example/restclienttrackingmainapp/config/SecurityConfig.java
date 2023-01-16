@@ -9,9 +9,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String HOME_PAGE = "/";
     private static final String SIGN_IN_PAGE = "/sign-in";
     private static final String SIGN_IN_API = "/api/sign-in";
-    private static final String HOME_PAGE = "/";
+    private static final String SIGN_OUT_API = "/api/sign-out";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -28,6 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage(SIGN_IN_PAGE)
                 .loginProcessingUrl(SIGN_IN_API)
                 .defaultSuccessUrl(HOME_PAGE, true)
-                .failureUrl(SIGN_IN_PAGE + "?error");
+                .failureUrl(SIGN_IN_PAGE + "?error")
+                .and()
+                .logout()
+                .logoutUrl(SIGN_OUT_API)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl(HOME_PAGE);
     }
 }

@@ -19,7 +19,7 @@
         <a class="navbar-brand btn btn-outline-primary" th:href="@{/sign-in}" sec:authorize="!isAuthenticated()">Sign In</a>
     </div>
     <div class="nav-item">
-        <a class="navbar-brand btn btn-outline-primary" th:href="@{/logout}" sec:authorize="isAuthenticated()">Sign out</a>
+        <a class="navbar-brand btn btn-outline-primary" th:href="@{/sign-out}" sec:authorize="isAuthenticated()">Sign out</a>
     </div>
 </nav>
 <!-- Bootstrap core JS-->
