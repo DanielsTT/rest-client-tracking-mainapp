@@ -15,17 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateUserDto {
 
-    @NotEmpty
+    //    @NotEmpty
     private String firstName;
-    @NotEmpty
+    //    @NotEmpty
     private String lastName;
 
-    @NotEmpty(message = "Email should not be empty")
-    @Email
+    //    @NotEmpty(message = "Email should not be empty")
+//    @Email
     private String email;
     //    @NotEmpty(message = "Password should not be empty")
     private String password;
-    @NotEmpty
+    //    @NotEmpty
     private String phone;
 
     private List<String> roles;

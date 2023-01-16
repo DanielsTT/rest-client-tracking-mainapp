@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -43,6 +45,6 @@ public class User {
             joinColumns = @JoinColumn(name = User.COLUMN_PREFIX + "id"),
             inverseJoinColumns = @JoinColumn(name = Role.COLUMN_PREFIX + "id")
     )
-    private Set<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
 }

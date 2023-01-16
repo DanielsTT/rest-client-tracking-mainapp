@@ -2,7 +2,6 @@ package com.example.restclienttrackingmainapp.controller;
 
 import com.example.restclienttrackingmainapp.dto.CreateUserDto;
 import com.example.restclienttrackingmainapp.dto.UserDto;
-import com.example.restclienttrackingmainapp.service.SecureUserService;
 import com.example.restclienttrackingmainapp.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
