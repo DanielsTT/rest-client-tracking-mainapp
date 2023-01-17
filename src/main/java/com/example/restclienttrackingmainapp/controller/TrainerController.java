@@ -1,8 +1,8 @@
 package com.example.restclienttrackingmainapp.controller;
 
-import com.example.restclienttrackingmainapp.dto.CreateUserDto;
-import com.example.restclienttrackingmainapp.dto.UserDto;
-import com.example.restclienttrackingmainapp.service.UserService;
+import com.example.restclienttrackingmainapp.dto.CreateTrainerDto;
+import com.example.restclienttrackingmainapp.dto.TrainerDto;
+import com.example.restclienttrackingmainapp.service.TrainerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,33 +14,33 @@ import javax.validation.Valid;
 @RequestMapping("/trainers")
 public class TrainerController {
 
-    private final UserService userService;
+    private final TrainerService trainerService;
 
-    public TrainerController(UserService userService) {
-        this.userService = userService;
+    public TrainerController(TrainerService trainerService) {
+        this.trainerService = trainerService;
     }
 
     @GetMapping("/all")
     public String getTrainers(Model model) {
-        model.addAttribute("trainers", userService.getAllUsers());
+        model.addAttribute("trainers", trainerService.getAllTrainers());
         return "trainers";
     }
 
     @GetMapping("/new")
     public String getNewTrainerForm(Model model) {
-        model.addAttribute("trainer", new UserDto());
+        model.addAttribute("trainer", new TrainerDto());
         return "trainer-form";
     }
 
     @PostMapping(value = "/new")
-    public String addNewTrainer(@Valid @ModelAttribute("trainer") CreateUserDto user, Model model) {
-        model.addAttribute("trainer", userService.createUser(user));
+    public String addNewTrainer(@Valid @ModelAttribute("trainer") CreateTrainerDto trainer, Model model) {
+        model.addAttribute("trainer", trainerService.createTrainer(trainer));
         return "trainer";
     }
 
     @GetMapping("{id}")
     public String getTrainer(@PathVariable Long id, Model model) {
-        UserDto trainerDto = userService.findById(id).orElseThrow();
+        TrainerDto trainerDto = trainerService.findById(id).orElseThrow();
         model.addAttribute("trainer", trainerDto);
         return "trainer";
     }
@@ -48,15 +48,15 @@ public class TrainerController {
 
     @GetMapping("edit/{id}")
     public String getEditTrainerForm(@PathVariable Long id, Model model) {
-        UserDto trainerDto = userService.findById(id).orElseThrow();
+        TrainerDto trainerDto = trainerService.findById(id).orElseThrow();
         model.addAttribute("trainer", trainerDto);
         return "trainer-edit-form";
     }
 
 
     @PostMapping(value = "/update")
-    public String editTrainer(@Valid @ModelAttribute("trainer") UserDto trainer, Model model) {
-        UserDto update = userService.updateUser(trainer);
+    public String editTrainer(@Valid @ModelAttribute("trainer") TrainerDto trainer, Model model) {
+        TrainerDto update = trainerService.updateTrainer(trainer);
 
         if (update == null) {
             return "error";
@@ -68,7 +68,7 @@ public class TrainerController {
 
     @GetMapping("/delete/{id}")
     public String deleteTrainer(@PathVariable Long id) {
-        userService.deleteUser(id);
+        trainerService.deleteTrainer(id);
         return "redirect:/trainers/all";
     }
 

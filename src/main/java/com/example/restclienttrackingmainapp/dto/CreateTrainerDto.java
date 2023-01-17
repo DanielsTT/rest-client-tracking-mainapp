@@ -5,25 +5,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateUserDto {
+public class CreateTrainerDto {
 
     @NotEmpty
-    private String name;
-
-    @NotEmpty(message = "Email should not be empty")
-    @Email
+    private String firstName;
+    @NotEmpty
+    private String lastName;
+    @NotEmpty
     private String email;
-
-    @NotEmpty(message = "Password should not be empty")
-    private String password;
-
-    private List<String> roles;
+    @NotEmpty
+    private String phone;
 }
