@@ -19,6 +19,8 @@ public class CreateEventLogDto {
 
     private String requestUri;
 
+    private String user;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime requestTimestamp;
 }

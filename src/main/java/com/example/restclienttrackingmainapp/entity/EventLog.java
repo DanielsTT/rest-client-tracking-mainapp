@@ -18,6 +18,7 @@ public class EventLog {
     private String ipAddress;
     private String requestMethod;
     private String requestUri;
+    private String user;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime requestTimestamp;

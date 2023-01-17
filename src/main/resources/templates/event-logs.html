@@ -26,15 +26,16 @@
                     <th scope="col">Date</th>
                     <th scope="col">Request</th>
                     <th scope="col">URL</th>
+                    <th scope="col">User ID</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="log: ${logs}">
-                    <!--          <td th:text="${trainer.id}" />-->
                     <td th:text="${log.ipAddress}" />
                     <td th:text="${log.requestTimestamp}" />
                     <td th:text="${log.requestMethod}" />
                     <td th:text="${log.requestUri}" />
+                    <td th:text="${log.user}" />
                 </tr>
                 </tbody>
             </table>
